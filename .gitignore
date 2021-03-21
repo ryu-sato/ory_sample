@@ -5,38 +5,38 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/app_a/.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-*
+/app_a/db/*.sqlite3
+/app_a/db/*.sqlite3-*
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp
-/tmp/*
-!/log/.keep
-!/tmp/.keep
-/vendor/bundle
+/app_a/log/*
+/app_a/tmp
+/app_a/tmp/*
+!/app_a/log/.keep
+!/app_a/tmp/.keep
+/app_a/vendor/bundle
 
 # Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
+/app_a/tmp/pids/*
+!/app_a/tmp/pids/
+!/app_a/tmp/pids/.keep
 
 # Ignore uploaded files in development.
-/storage/*
-!/storage/.keep
+/app_a/storage/*
+!/app_a/storage/.keep
 
-/public/assets
-.byebug_history
+/app_a/public/assets
+/app_a/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+/app_a/config/master.key
 
-/public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
+/app_a/public/packs
+/app_a/public/packs-test
+/app_a/node_modules
+/app_a/yarn-error.log
+/app_a/yarn-debug.log*
+/app_a/.yarn-integrity
