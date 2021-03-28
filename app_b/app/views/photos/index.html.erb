@@ -12,8 +12,8 @@
   <tbody>
     <% @photos.each do |photo| %>
       <tr>
-        <td><%= image_tag url_for(photo.url), height: '32' %></td>
-        <td><%= link_to 'Show', photo %></td>
+        <td><%= image_tag photo_url(photo), height: '32' %></td>
+        <td><%= link_to 'Show', photo_path(photo.id) %></td>
       </tr>
     <% end %>
   </tbody>

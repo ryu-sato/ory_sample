@@ -3,5 +3,4 @@ Rails.application.routes.draw do
   root 'photos#index'
 
   resources :photos, only: %i[index show]
-  resources :printings, except: %i[edit update]
 end

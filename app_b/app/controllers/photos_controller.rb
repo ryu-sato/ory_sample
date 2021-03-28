@@ -1,23 +1,11 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: %i[ show edit update destroy ]
-
   # GET /photos or /photos.json
   def index
-    @photos = PhotosService.instance.index
+    @photos = PhotosService.instance.own_photos
   end
 
   # GET /photos/1 or /photos/1.json
   def show
+    @photo = PhotosService.instance.own_photos.find { |photo| photo.id == params[:id].to_i }
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo
-      @photo = Photo.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def photo_params
-      params.fetch(:photo, {})
-    end
 end

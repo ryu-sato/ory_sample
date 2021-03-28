@@ -1,5 +1,31 @@
+<style>
+.box {
+  position: relative;
+  width: 600px;
+  height: 800px;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sepia {
+  filter: sepia(70%);
+}
+</style>
+
 <p id="notice"><%= notice %></p>
 
-<%= image_tag url_for(photo.url) %>
+<div class="box">
+  <div class="center">
+    <img src="/frame.jpg"/>
+  </div>
+  <div class="center sepia">
+    <%= image_tag photo_url(@photo) %>
+  </div>
+</div>
 
 <%= link_to 'Back', photos_path %>
+<input type="button" value="このページを印刷" onclick="window.print();">

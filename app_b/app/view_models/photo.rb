@@ -1,6 +1,7 @@
 class Photo
-  include ActiveModel::Attributes
   include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attribute :url
+  attribute :id, :integer
+  attribute :path, :string
 end
