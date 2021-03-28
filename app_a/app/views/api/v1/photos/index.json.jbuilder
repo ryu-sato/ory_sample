@@ -1,4 +1,4 @@
 json.array! @photos do |photo|
   json.extract! photo, :id, :created_at, :updated_at
-  json.url photo_url(photo, format: :json)
+  json.path photo_api_path(photo)
 end
