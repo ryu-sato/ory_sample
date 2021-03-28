@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Printings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @printings.each do |printing| %>
+      <tr>
+        <td><%= link_to 'Show', printing %></td>
+        <td><%= link_to 'Destroy', printing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
