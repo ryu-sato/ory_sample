@@ -38,18 +38,13 @@ module Api
       'Bearer'.casecmp(type) == 0 ? credentials : nil
     end
 
-    def access_token_in_body
-      request.body&.access_token
-    end
-
     def access_token_in_param
       params[:access_token]
     end
 
-    def access_token(allowed_methods = %i[bearer body query])
+    def access_token(allowed_methods = %i[bearer param])
       (allowed_methods.include?(:bearer) && bearer_token) ||
-      (allowed_methods.include?(:body) && access_token_in_body) ||
-      (allowed_methods.include?(:query) && access_token_in_param)
+      (allowed_methods.include?(:param) && access_token_in_param)
     end
 
     def authentication_failed(error)
