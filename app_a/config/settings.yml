@@ -1,0 +1,3 @@
+openid:
+  provider:
+    host: localhost:4445
