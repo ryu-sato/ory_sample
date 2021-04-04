@@ -3,6 +3,7 @@ class HydraService
 
   def initialize
     @config = OryHydraClient::Configuration.new do |config|
+      config.debugging = Settings.openid.provider.debugging
       config.server_index = nil # デフォルトの0ではHydraとClientが同一ホストである設定になるため解除する
       config.host = Settings.openid.provider.host
     end

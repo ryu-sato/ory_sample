@@ -1,0 +1,4 @@
+openid:
+  provider:
+    host: localhost:4445
+    debugging: true
