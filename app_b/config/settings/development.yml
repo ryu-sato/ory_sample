@@ -1,1 +1,4 @@
 photo_service_url_base: http://localhost:3100/
+openid:
+  provider:
+    host: localhost:4444
