@@ -1,0 +1,18 @@
+<h1>Authorization</h1>
+
+<%= form_with(url: '#') do |form| %>
+  <div>次の権限を許可しますか？</div>
+  <dl>
+    <dt>ClientId</dt>
+    <dd><%= @client_id %></dd>
+    <dt>scope</dt>
+    <dd><%= @scope %></dd>
+    <dt>authorize</dt>
+    <dd><input type="checkbox" name="authorize" value="true" /></dd>
+  </dl>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', '#' %>

@@ -1,0 +1,4 @@
+openid:
+  provider:
+    host: nil
+    debugging: false

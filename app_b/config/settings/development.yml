@@ -1,4 +1,10 @@
 photo_service_url_base: http://localhost:3100/
 openid:
+  client_id: print_application
+  password: secret
+  redirect_uri: http://localhost:3200/callback
   provider:
-    host: localhost:4444
+    public_host: localhost:4444
+    admin_host: localhost:4445
+    auth_endpoint: http://localhost:4444/oauth2/auth
+  scope: 'openid photos.index photos.show'

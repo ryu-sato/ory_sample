@@ -14,6 +14,13 @@ class PhotosController < ApplicationController
   private
 
   def set_access_token
-    @access_token = HydraService.instance.issue_token
+    authorization = Authorization.find_by(subject: 'test@a.a')
+    raise Errors::AuthenticationFailed if authorization.blank?
+
+    @access_token = authorization.access_token
+  end
+
+  def authorize_params
+    params.permit(:code)
   end
 end

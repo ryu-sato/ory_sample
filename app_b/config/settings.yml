@@ -1,1 +1,10 @@
 photo_service_url_base: nil
+openid:
+  client_id: print_application
+  password: nil
+  redirect_uri: nil
+  provider:
+    public_host: nil
+    admin_host: nil
+    auth_endpoint: nil
+  scope: nil

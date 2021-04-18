@@ -6,6 +6,7 @@ class PhotosService
 
   def own_photos(access_token)
     res = http_request(access_token, :get, PHOTO_API_PATH_BASE).run
+    raise Errors::AuthorizationFailed if res.response_code == 403
     JSON.parse(res.body, symbolize_names: true).map do |photo_attributes|
       Photo.new(photo_attributes.slice(:id, :path))
     end
@@ -13,6 +14,7 @@ class PhotosService
 
   def own_photo(access_token, photo_id)
     res = http_request(access_token, :get, File.join(PHOTO_API_PATH_BASE, photo_id)).run
+    raise Errors::AuthorizationFailed if res.response_code == 403
     Photo.new(id: photo_id, data: res.body)
   end
 
