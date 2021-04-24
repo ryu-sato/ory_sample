@@ -19,8 +19,4 @@ class PhotosController < ApplicationController
 
     @access_token = authorization.access_token
   end
-
-  def authorize_params
-    params.permit(:code)
-  end
 end
