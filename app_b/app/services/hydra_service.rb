@@ -48,9 +48,7 @@ class HydraService
         Authorization: @config.basic_auth_token
       }
     }
-    res = @public_client.oauth2_token('authorization_code', opts)
-
-    res.access_token
+    @public_client.oauth2_token('authorization_code', opts)
   end
   
   def introspect_token(token)
@@ -60,3 +58,4 @@ class HydraService
     @admin_client.introspect_o_auth2_token(token, opts)
   end
 end
+  

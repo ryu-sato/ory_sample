@@ -2,39 +2,28 @@ class AuthenticationsController < ApplicationController
 
   def new
     login_request = HydraService.instance.login_request(current_login_challenge)
-    logger.debug('-----login_request begin-----')
-    logger.debug(login_request)
-    logger.debug('-----login_request end-----')
-    if login_request.skip
-      logger.debug('already logged in, skip authentication.')
-      redirect_to root_path
-      return
-    end
+    accept_login_and_redirect(login_request.subject) and return if login_request.skip
 
     @login_challenge = current_login_challenge
-    @user = User.new
   end
 
   def create
-    email = user_params[:email]
-    raise Errors::AuthenticationFailed unless authenticate(email)
+    user = User.find_by(email: authentication_params[:email])
+    raise Errors::AuthenticationFailed if user.blank?
+    raise Errors::AuthenticationFailed unless user.authenticate(authentication_params[:password])
 
-    completed_request = HydraService.instance.accept_login(current_login_challenge, email)
-    logger.debug('-----completed_request begin-----')
-    logger.debug(completed_request)
-    logger.debug('-----completed_request end-----')
-    
-    redirect_to completed_request.redirect_to
+    accept_login_and_redirect(user.email)
   end
 
   private
-
-  def authenticate(user)
-    true
+  
+  def accept_login_and_redirect(subject)
+    completed_request = HydraService.instance.accept_login(current_login_challenge, subject)
+    redirect_to completed_request.redirect_to
   end
 
-  def user_params
-    params.fetch(:user, {}).permit(:email, :password)
+  def authentication_params
+    params.permit(:email, :password)
   end
 
   def current_login_challenge
