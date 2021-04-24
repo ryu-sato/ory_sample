@@ -1,11 +1,10 @@
-<h1>Login</h1>
+<h1>ログイン</h1>
 
-<%= form_with(model: @user, url: authentications_path) do |form| %>
+<%= form_with(url: authentications_path) do |form| %>
   <input type="hidden" name="login_challenge" value="<%= @login_challenge %>"/>
 
-  <div>ログイン画面(何もしない)</div>
   <dl>
-    <dt>Login challenge</dt>
+    <dt>Login challenge(デバッグ用)</dt>
     <dd><%= @login_challenge %></dd>
     <dt>E-mail</dt>
     <dd><%= form.text_field :email %></dd>
@@ -13,8 +12,6 @@
     <dd><%= form.password_field :password %> </dd>
   </dl>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Login' %>
   </div>
 <% end %>
-
-<%= link_to 'Back', '#' %>
