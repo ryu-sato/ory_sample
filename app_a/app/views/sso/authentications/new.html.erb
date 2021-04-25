@@ -1,6 +1,6 @@
 <h1>ログイン</h1>
 
-<%= form_with(url: authentications_path) do |form| %>
+<%= form_with(url: sso_authentications_path) do |form| %>
   <input type="hidden" name="login_challenge" value="<%= @login_challenge %>"/>
 
   <dl>
