@@ -43,4 +43,20 @@ class ApplicationController < ActionController::Base
     raise Errors::AuthenticationFailed if Rack::Utils::SYMBOL_TO_STATUS_CODE[:unauthorized] == error.code
     raise error
   end
+
+  def save_id_token(id_token)
+    cookies[:id_token] = id_token
+  end
+
+  def authenticate!
+    raise Errors::AuthenticationFailed if cookies[:id_token].blank?
+    raise Errors::AuthenticationFailed unless HydraService.instance.id_token_active?(cookies[:id_token])
+  end
+
+  def current_user
+    return "" if cookies[:id_token].blank?
+
+    jwt_paylaod = JWT.decode(cookies[:id_token], nil, false).first
+    jwt_paylaod["sub"]
+  end
 end

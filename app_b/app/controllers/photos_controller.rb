@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  before_action :authenticate!
   before_action :set_access_token
 
   # GET /photos or /photos.json
@@ -14,7 +15,7 @@ class PhotosController < ApplicationController
   private
 
   def set_access_token
-    authorization = Authorization.find_by(subject: 'test@a.a')
+    authorization = Authorization.find_by(subject: current_user)
     raise Errors::AuthenticationFailed if authorization.blank?
 
     @access_token = authorization.access_token

@@ -14,16 +14,6 @@ class HydraService
     end
     @client = OryHydraClient::ApiClient.new(@config)
     @public_client = OryHydraClient::PublicApi.new(@client)
-
-    admin_config = OryHydraClient::Configuration.new do |config|
-      config.debugging = Settings.openid.provider.debugging
-      config.server_index = nil # デフォルトの0ではHydraとClientが同一ホストである設定になるため解除する
-      config.host = Settings.openid.provider.admin_host
-      config.username = Settings.openid.client_id
-      config.password = Settings.openid.password
-    end
-    admin_client = OryHydraClient::ApiClient.new(admin_config)
-    @admin_client = OryHydraClient::AdminApi.new(admin_client)
   end
 
   def begin_login_url
@@ -50,12 +40,21 @@ class HydraService
     }
     @public_client.oauth2_token('authorization_code', opts)
   end
-  
-  def introspect_token(token)
-    opts = {
-      scope: Settings.openid.scope
-    }
-    @admin_client.introspect_o_auth2_token(token, opts)
+
+  def id_token_active?(id_token)
+    jwks = @public_client.well_known
+    return false unless jwks.valid?
+
+    begin
+      # see. https://www.ory.sh/hydra/docs/security-architecture/#rs256
+      JWT.decode(id_token, nil, true, {
+        algorithms: %w[RS256],
+        jwks: jwks.to_hash
+      })
+    rescue JWT::DecodeError => error
+      return false
+    end
+
+    true
   end
 end
-  
