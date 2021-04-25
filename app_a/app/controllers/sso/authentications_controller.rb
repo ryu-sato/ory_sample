@@ -13,7 +13,7 @@ module Sso
       raise Errors::AuthenticationFailed if user.blank?
       raise Errors::AuthenticationFailed unless user.authenticate(authentication_params[:password])
 
-      accept_login_and_redirect(user.email)
+      accept_login_and_redirect(user.id.to_s)
     end
 
     private

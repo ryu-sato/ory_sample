@@ -6,12 +6,14 @@ module Api
 
       # GET /api/v1/photos
       def index
-        @photos = Photo.all
+        @photos = Photo.where(user: current_user)
       end
 
       # GET /api/v1/photos/:id
       def show
-        photo = Photo.find(params[:id])
+        photo = Photo.find_by(id: params[:id], user: current_user)
+        render_not_found and return if photo.blank?
+
         data = photo.attachment.download
         send_data data, type: photo.attachment.content_type, disposition: 'inline'
       end

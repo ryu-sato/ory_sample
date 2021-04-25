@@ -41,4 +41,11 @@ class HydraService
   def consent_request(consent_challenge)
     @admin_client.get_consent_request(consent_challenge)
   end
+
+  def introspect_token(token)
+    opts = {
+      scope: Settings.openid.scope
+    }
+    @admin_client.introspect_o_auth2_token(token, opts)
+  end
 end
