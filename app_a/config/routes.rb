@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   # OpenID Connect ID Provider
   namespace :sso do
     get 'login', to: 'authentications#new'
+    post 'login', to: 'authentications#create'
     # delete 'logout', to: 'authentications#destroy'
-    resources :authentications, only: %i[create]
 
     get 'consent', to: 'authorizations#new'
     post 'consent', to: 'authorizations#create'
