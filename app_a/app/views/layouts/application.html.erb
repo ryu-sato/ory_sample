@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <% unless content_for?(:no_logout) %>
+      <div width="100%" style="text-align: right;">
+        <%= form_with(url: logout_path, method: :delete) do |form| %>
+          <div class="actions">
+            <%= form.submit 'Logout' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

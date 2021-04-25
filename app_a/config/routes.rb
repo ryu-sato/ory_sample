@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   # resources
   resources :photos
+  
+  # Login/Logout
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 
   # API
   namespace :api, defaults: { format: :json } do
