@@ -25,9 +25,9 @@ class AuthorizationsController < ApplicationController
   
   def accept_consent_and_redirect(consent_request)
     completed_request = HydraService.instance.accept_consent(
-      current_consent_challenge,
-      consent_request.requested_scope,
-      consent_request.requested_access_token_audience)
+                          current_consent_challenge,
+                          consent_request.requested_scope,
+                          consent_request.requested_access_token_audience)
 
     redirect_to completed_request.redirect_to
   end
