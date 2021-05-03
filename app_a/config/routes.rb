@@ -25,5 +25,7 @@ Rails.application.routes.draw do
 
     get 'consent', to: 'authorizations#new'
     post 'consent', to: 'authorizations#create'
+    
+    get 'userinfo', to: 'users#userinfo'
   end
 end
