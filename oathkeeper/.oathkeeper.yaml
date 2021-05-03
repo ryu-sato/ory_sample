@@ -1,0 +1,72 @@
+serve:
+  proxy:
+    port: 4455 # run the proxy at port 4455
+  api:
+    port: 4456 # run the api at port 4456
+
+access_rules:
+  repositories:
+    - file:///home/ory/access_rules.yaml
+
+errors:
+  fallback:
+    - json
+  handlers:
+    json:
+      enabled: true
+      config:
+        verbose: true
+    redirect:
+      enabled: true
+      config:
+        to: http://localhost:4444/oauth2/auth?response_type=code&client_id=members_application&scope=openid+members&redirect_uri=http%3A%2F%2Flocalhost%3A4455%2Fcallback&state=ZGHWfNTjeY
+
+mutators:
+  header:
+    enabled: true
+    config:
+      headers:
+        X-User: "{{ print .Subject }}"
+  noop:
+    enabled: true
+  id_token:
+    enabled: true
+    config:
+      issuer_url: http://localhost:4455/
+      jwks_url: http://localhost:4455/.well-known/jwks.json
+
+authorizers:
+  allow:
+    enabled: true
+  deny:
+    enabled: true
+
+# Set enabled to true if the authenticator should be enabled and false to disable the authenticator. Defaults to false.
+# ref. https://www.ory.sh/oathkeeper/docs/pipeline/authn
+authenticators:
+  oauth2_introspection:
+    enabled: true
+
+    config:
+      introspection_url: http://localhost:4445/oauth2/introspect
+      scope_strategy: exact
+      required_scope:
+        - members
+      target_audience:
+        - members_application
+      trusted_issuers:
+        - http://localhost:4444/
+      token_from:
+        header: Custom-Authorization-Header
+        # or
+        # query_parameter: auth-token
+        # or
+        # cookie: auth-token
+      introspection_request_headers:
+        x-forwarded-proto: http
+      retry:
+        max_delay: 300ms
+        give_up_after: 2s
+      cache:
+        enabled: true
+        ttl: 60s
