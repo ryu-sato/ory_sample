@@ -1,0 +1,12 @@
+oauth2-proxy \
+  --upstream 'http://localhost:3300/' \
+  --provider 'oidc' \
+  --oidc-issuer-url 'http://localhost:4444/' \
+  --oidc-jwks-url 'http://localhost:4455/.well-known/jwks.json' \
+  --client-id 'members_application' \
+  --client-secret 'secret' \
+  --email-domain '*' \
+  --cookie-secret 'hu9XrailLtAYwQCHyQkGUw==' \
+  --cookie-secure 'false' \
+  --redirect-url 'http://localhost:4180/oauth2/callback' \
+  --profile-url 'http://localhost:3100/sso/userinfo'
