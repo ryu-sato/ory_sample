@@ -1,3 +1,5 @@
 class NewsController < ApplicationController
-  def index; end
+  def index
+    logger.debug(request.headers['Authorization'])
+  end
 end
