@@ -3,7 +3,7 @@ module Sso
     before_action :authorization_for_profile!, only: :profile
 
     def userinfo
-      introspection = ::HydraService.instance.introspect_token(access_token)
+      introspection = ::HydraService.instance.introspect_token(access_token, 'openid profile')
       
       info = {
         sub: introspection.sub

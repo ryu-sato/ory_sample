@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :photos
   
   # Login/Logout
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  # get 'login', to: 'sessions#new'
+  # post 'login', to: 'sessions#create'
+  # delete 'logout', to: 'sessions#destroy'
 
   # API
   namespace :api, defaults: { format: :json } do
@@ -21,10 +21,11 @@ Rails.application.routes.draw do
   namespace :sso do
     get 'login', to: 'authentications#new'
     post 'login', to: 'authentications#create'
-    # delete 'logout', to: 'authentications#destroy'
+    delete 'logout', to: 'authentications#destroy'
 
     get 'consent', to: 'authorizations#new'
     post 'consent', to: 'authorizations#create'
+    get 'callback', to: 'sessions#callback'
     
     get 'userinfo', to: 'users#userinfo'
   end

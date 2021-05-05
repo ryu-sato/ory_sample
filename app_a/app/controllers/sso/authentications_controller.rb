@@ -15,6 +15,13 @@ module Sso
 
       accept_login_and_redirect(user.id.to_s)
     end
+    
+    def destroy
+      HydraService.instance.log_out(current_user)
+      delete_id_token
+
+      redirect_to root_path
+    end
 
     private
     

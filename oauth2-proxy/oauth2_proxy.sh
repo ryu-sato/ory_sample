@@ -5,6 +5,7 @@ oauth2-proxy \
   --oidc-jwks-url 'http://localhost:4455/.well-known/jwks.json' \
   --client-id 'members_application' \
   --client-secret 'secret' \
+  --scope 'openid members profile email' \
   --redirect-url 'http://localhost:4180/oauth2/callback' \
   --profile-url 'http://localhost:3100/sso/userinfo' \
   --email-domain '*' \

@@ -1,4 +1,10 @@
 openid:
+  client_id: photos_application
+  password: secret
+  redirect_uri: http://localhost:3100/sso/callback
   provider:
-    host: localhost:4445
-    debugging: true
+    public_host: localhost:4444
+    admin_host: localhost:4445
+    auth_endpoint: http://localhost:4444/oauth2/auth
+    logout_endpoint: http://localhost:4444/oauth2/logout
+  scope: 'openid photos.index photos.show photos.create photos.destroy photos.update'
