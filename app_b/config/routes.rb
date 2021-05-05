@@ -2,7 +2,8 @@
 Rails.application.routes.draw do
   root 'photos#index'
 
-  get 'authorize', to: 'authorizations#authorize'
-  get 'callback', to: 'authorizations#callback'
   resources :photos, only: %i[index show]
+
+  # Authorization
+  get 'callback', to: 'authorizations#callback'
 end

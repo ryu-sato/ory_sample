@@ -1,8 +1,4 @@
 class AuthorizationsController < ApplicationController
-  def authorize
-    redirect_to HydraService.instance.begin_login_url
-  end
-
   def callback
     code = authorized_params[:code]
     response = HydraService.instance.issue_token(code)
